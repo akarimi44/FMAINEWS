@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contacts{% endblock %}
+
+{% block body %}
+    <h1>Contacts</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ contact.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ contact.title }}</td>
+            </tr>
+            <tr>
+                <th>Sujet</th>
+                <td>{{ contact.sujet }}</td>
+            </tr>
+            <tr>
+                <th>Message_contact</th>
+                <td>{{ contact.messageContact }}</td>
+            </tr>
+            <tr>
+                <th>Email_contact</th>
+                <td>{{ contact.emailContact }}</td>
+            </tr>
+            <tr>
+                <th>Created_at_contact</th>
+                <td>{{ contact.createdAtContact ? contact.createdAtContact|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_contacts_index') }}">back to list</a>
+
+    <a href="{{ path('app_contacts_edit', {'id': contact.id}) }}">edit</a>
+
+    {{ include('contacts/_delete_form.html.twig') }}
+{% endblock %}
