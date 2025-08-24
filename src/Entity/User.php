@@ -53,11 +53,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: 'user')]
     private Collection $comments;
 
+    /**
+     * @var Collection<int, Posts>
+     */
+    #[ORM\OneToMany(targetEntity: Posts::class, mappedBy: 'auteur')]
+    private Collection $posts;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->createdAtUser = new \DateTimeImmutable();
         $this->roles = ['ROLE_USER'];
+        $this->posts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -213,6 +220,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($comment->getUser() === $this) {
                 $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Posts>
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function addPost(Posts $post): static
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts->add($post);
+            $post->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(Posts $post): static
+    {
+        if ($this->posts->removeElement($post)) {
+            // set the owning side to null (unless already changed)
+            if ($post->getAuteur() === $this) {
+                $post->setAuteur(null);
             }
         }
 
