@@ -21,7 +21,13 @@ final class PostsController extends AbstractController
             'posts' => $postsRepository->findAll(),
         ]);
     }
-
+    #[Route('/home', name: 'app_home')]
+    public function indexHome(PostsRepository $postsRepository): Response
+    {
+        return $this->render('mainPages/home.html.twig', [
+            'posts' => $postsRepository->findLatestPosts(6),
+        ]);
+    }
     #[Route('/new', name: 'app_posts_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -42,8 +48,16 @@ final class PostsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_posts_show', methods: ['GET'])]
+    #[Route('/show/{id}', name: 'app_posts_show_user', methods: ['GET'])]
     public function show(Posts $post): Response
+    {
+        return $this->render('mainPages/show.html.twig', [
+            'post' => $post,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_posts_show', methods: ['GET'])]
+    public function showPost(Posts $post): Response
     {
         return $this->render('posts/show.html.twig', [
             'post' => $post,
@@ -71,7 +85,7 @@ final class PostsController extends AbstractController
     #[Route('/{id}', name: 'app_posts_delete', methods: ['POST'])]
     public function delete(Request $request, Posts $post, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($post);
             $entityManager->flush();
         }

@@ -19,25 +19,14 @@ class PostsRepository extends ServiceEntityRepository
     //    /**
     //     * @return Posts[] Returns an array of Posts objects
     //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Posts
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findLatestPosts(int $limit = 6): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.is_published = :isPublished')
+            ->setParameter('isPublished', true)
+            ->orderBy('p.created_at_post', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }
