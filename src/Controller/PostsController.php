@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Entity\Comments;
+use App\Form\CommentsType;
 
 #[Route('/posts')]
 final class PostsController extends AbstractController
@@ -47,12 +49,28 @@ final class PostsController extends AbstractController
             'form' => $form,
         ]);
     }
-
-    #[Route('/show/{id}', name: 'app_posts_show_user', methods: ['GET'])]
-    public function show(Posts $post): Response
+    #[Route('/show/{id}', name: 'app_posts_show_user', methods: ['GET', 'POST'])]
+    public function show(Request $request, Posts $post, EntityManagerInterface $em): Response
     {
+        $comment = new Comments();
+        $form = $this->createForm(CommentsType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setUser($this->getUser());
+            $comment->setPost($post);
+            $comment->setCreatedAtComment(new \DateTimeImmutable());
+
+            $em->persist($comment);
+            $em->flush();
+
+            return $this->redirectToRoute('app_posts_show_user', ['id' => $post->getId()]);
+        }
+
         return $this->render('mainPages/show.html.twig', [
             'post' => $post,
+            'form' => $form->createView(),
+            'comments' => $post->getComments(),
         ]);
     }
 

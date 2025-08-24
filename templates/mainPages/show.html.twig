@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+    <div class="post">
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.content }}</p>
+        <small>
+            Publié le {{ post.createdAtPost|date('d/m/Y H:i') }}
+            par {{ post.auteur.pseudo }}
+        </small>
+    </div>
+
+    <hr>
+
+    <div class="comments">
+        <h2>Commentaires ({{ comments|length }})</h2>
+
+        {% if comments is not empty %}
+            {% for comment in comments %}
+                <div class="comment" style="margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ddd; border-radius: 5px;">
+                    <strong>{{ comment.user.pseudo }}</strong> 
+                    <small>— {{ comment.createdAtComment|date('d/m/Y H:i') }}</small>
+                    <p>{{ comment.commentText }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Aucun commentaire pour le moment.</p>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <div class="add-comment">
+        <h2>Ajouter un commentaire</h2>
+        {{ form_start(form) }}
+            {{ form_row(form.comment_text, {'label': 'Votre commentaire'}) }}
+            <button class="btn btn-primary">Envoyer</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
