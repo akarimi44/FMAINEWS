@@ -2,16 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Posts;
+
 use App\Form\PostsType;
+use App\Entity\Posts;
 use App\Repository\PostsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use App\Entity\Comments;
-use App\Form\CommentsType;
+
+
 
 #[Route('/posts')]
 final class PostsController extends AbstractController
@@ -21,13 +22,6 @@ final class PostsController extends AbstractController
     {
         return $this->render('posts/index.html.twig', [
             'posts' => $postsRepository->findAll(),
-        ]);
-    }
-    #[Route('/home', name: 'app_home')]
-    public function indexHome(PostsRepository $postsRepository): Response
-    {
-        return $this->render('mainPages/home.html.twig', [
-            'posts' => $postsRepository->findLatestPosts(6),
         ]);
     }
     #[Route('/new', name: 'app_posts_new', methods: ['GET', 'POST'])]
@@ -49,31 +43,6 @@ final class PostsController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/show/{id}', name: 'app_posts_show_user', methods: ['GET', 'POST'])]
-    public function show(Request $request, Posts $post, EntityManagerInterface $em): Response
-    {
-        $comment = new Comments();
-        $form = $this->createForm(CommentsType::class, $comment);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $comment->setUser($this->getUser());
-            $comment->setPost($post);
-            $comment->setCreatedAtComment(new \DateTimeImmutable());
-
-            $em->persist($comment);
-            $em->flush();
-
-            return $this->redirectToRoute('app_posts_show_user', ['id' => $post->getId()]);
-        }
-
-        return $this->render('mainPages/show.html.twig', [
-            'post' => $post,
-            'form' => $form->createView(),
-            'comments' => $post->getComments(),
-        ]);
-    }
-
     #[Route('/{id}', name: 'app_posts_show', methods: ['GET'])]
     public function showPost(Posts $post): Response
     {

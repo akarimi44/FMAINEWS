@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégorie{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">Articles de la catégorie</h1>
+    <div class="row">
+        {% if posts is empty %}
+            <div class="col-12">
+                <div class="alert alert-info">Aucun article dans cette catégorie.</div>
+            </div>
+        {% else %}
+            {% for post in posts %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="{{ asset('uploads/images/' ~ (post.image is not empty ? post.image : 'news.png')) }}" class="card-img-top" alt="{{ post.title }}">
+                        <div class="card-body">
+                            <h5>{{ post.title }}</h5>
+                            <p>{{ post.subtitle|slice(0,80) ~ '...' }}</p>
+                            <small class="text-muted">
+                                Auteur : {{ post.auteur.pseudo }} <br>
+                                Catégorie : {{ post.category.nameCategory }}
+                            </small>
+                            <div class="mt-3">
+                                <a href="{{ path('app_posts_show_user', {'id': post.id}) }}" class="btn btn-sm btn-outline-primary">Voir les détails</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

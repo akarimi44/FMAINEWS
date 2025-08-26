@@ -29,4 +29,16 @@ class PostsRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public function findPostsByCategory(int $categoryId, int $limit = 10): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.category = :categoryId')
+            ->andWhere('p.is_published = :isPublished')
+            ->setParameter('categoryId', $categoryId)
+            ->setParameter('isPublished', true)
+            ->orderBy('p.created_at_post', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }
