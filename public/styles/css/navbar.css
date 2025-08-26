@@ -1,0 +1,20 @@
+.nameSite {
+    font-size: 24px;
+    color: #333;
+    text-decoration: none;
+    font-family: "Germania One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.sideNav {
+    justify-content: space-between;
+}
+
+.header-social-links {
+    text-decoration: none;
+}
+
+a.loggouts {
+    text-decoration: none;
+}

@@ -1,19 +1,19 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-black bg-black text-white">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="nameSite text-white" href="/home">Fmai News</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse sideNav" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link text-white" aria-current="page" href="/home">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link  text-white" href="/contacts/new">Contactez-nous</a>
         </li>
          <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarCategoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarCategoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Catégories
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarCategoryDropdown">
@@ -25,28 +25,25 @@
             <li><a class="dropdown-item" href="{{path ('app_posts_by_category', {id: 10})}}">Alimentation PC</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
       </ul>
       <div class="header-social-links">
         {% if app.user %}
           {% if app.user.opption is same as ('yes') %}
               {% if app.user.avatar is empty %}
-                <i class="fa-solid fa-circle-user" style="color: black"></i>
+                <i class="fa-solid fa-circle-user" style="color: white"></i>
                 <span class="zxfirstname" style="text-decoration:none;">{{ app.user.pseudo|capitalize }}</span>
                 <a class="loggouts mr-2" href="{{ path('app_logout') }}">
-                  <i class="fa solid fa-power-off" style="color: black"></i>
+                  <i class="fa solid fa-power-off" style="color: white"></i>
                 </a>
                 <a class="zxadmin mr-2" href="">
-                  <i class="fa fa-circle-play" style="color: black"></i>
+                  <i class="fa fa-circle-play" style="color: white"></i>
                 </a>
                 {% else %}
                 <img class="roundedImage" src="{{ asset('uploads/images/' ~ app.user.avatar) }}" style="width:25px; height:25px; border-radius:50%">&ensp;
                 <span class="zxfirstname">{{ app.user.pseudo|capitalize }}</span>
-                <a class="loggouts" href="{{ path('app_logout') }}">&ensp;<i class="fa-solid fa-power-off" style="color: black"></i></a>
+                <a class="loggouts" href="{{ path('app_logout') }}">&ensp;<i class="fa-solid fa-power-off" style="color: white"></i></a>
                 <a class="zxadmin mr-2" href="">
-                  <i class="fa fa-circle-play" style="color: black"></i>
+                  <i class="fa fa-circle-play" style="color: white"></i>
                 </a>
               {% endif %}
           {% else %}
@@ -54,17 +51,17 @@
                 <i class="fa-solid fa-circle-user" style="color: black"></i>
                 <span class="zxfirstname" style="text-decoration:none;">{{ app.user.pseudo|capitalize }}</span>
                 <a class="loggouts mr-2" href="{{ path('app_logout') }}">
-                  <i class="fa solid fa-power-off" style="color: black"></i>
+                  <i class="fa solid fa-power-off" style="color: white"></i>
                 </a>
               {% else %}
                 <img class="roundedImage" src="{{ asset('uploads/images/' ~ app.user.avatar) }}" style="width:25px; height:25px; border-radius:50%">&ensp;
                 <span class="zxfirstname">{{ app.user.pseudo|capitalize }}</span>
-                <a class="loggouts" href="{{ path('app_logout') }}">&ensp;<i class="fa-solid fa-power-off" style="color:black"></i></a>
+                <a class="loggouts" href="{{ path('app_logout') }}">&ensp;<i class="fa-solid fa-power-off" style="color:white"></i></a>
             {% endif %}
           {% endif %}
         {% else %}
             <a class="login" href="{{ path('app_login') }}">
-              <i class="fa-regular fa-circle-user" style="color: black"></i>&ensp;
+              <i class="fa-regular fa-circle-user" style="color: white"></i>&ensp;
             </a>
         {% endif %}
       </div>

@@ -18,12 +18,12 @@
                                 <img src="{{ asset('uploads/images/' ~ posts[0].image) }}" class="card-img-top" alt="{{ posts[0].title }}">
                             {% endif %}
                             <div class="card-body">
+                                <div class="post-meta">
+                                    <span class="author">Auteur : {{ posts[0].auteur.pseudo }}</span><br>
+                                    <span class="category">Catégorie : {{ posts[0].category.nameCategory }}</span>
+                                </div>
                                 <h3>{{ posts[0].title }}</h3>
                                 <p>{{ posts[0].subtitle }}</p>
-                                <small class="text-muted">
-                                    Auteur : {{ posts[0].auteur.pseudo }} <br>
-                                    Catégorie : {{ posts[0].category.nameCategory }}
-                                </small>
                                 <div class="mt-3">
                                     <a href="{{ path('app_posts_show_user', {'id': posts[0].id}) }}" class="btn btn-primary">Voir les détails</a>
                                 </div>
@@ -41,12 +41,12 @@
                                             <img src="{{ asset('uploads/images/' ~ posts[i].image) }}" class="card-img-top" alt="{{ posts[i].title }}">
                                         {% endif %}
                                         <div class="card-body">
+                                            <div class="post-meta">
+                                                <span class="author">{{ posts[i].auteur.pseudo }}</span><br>
+                                                <span class="category">{{ posts[i].category.nameCategory }}</span>
+                                            </div>
                                             <h5>{{ posts[i].title }}</h5>
                                             <p>{{ posts[i].subtitle|slice(0,80) ~ '...' }}</p>
-                                            <small class="text-muted">
-                                                Auteur : {{ posts[i].auteur.pseudo }} <br>
-                                                Catégorie : {{ posts[i].category.nameCategory }}
-                                            </small>
                                             <div class="mt-3">
                                                 <a href="{{ path('app_posts_show_user', {'id': posts[i].id}) }}" class="btn btn-sm btn-outline-primary">Voir les détails</a>
                                             </div>
@@ -71,12 +71,12 @@
                                             <img src="{{ asset('uploads/images/' ~ posts[i].image) }}" class="card-img-top" alt="{{ posts[i].title }}">
                                         {% endif %}
                                         <div class="card-body">
+                                            <div class="post-meta">
+                                                <span class="author">{{ posts[i].auteur.pseudo }}</span><br>
+                                                <span class="category">{{ posts[i].category.nameCategory }}</span>
+                                            </div>
                                             <h5>{{ posts[i].title }}</h5>
                                             <p>{{ posts[i].subtitle|slice(0,80) ~ '...' }}</p>
-                                            <small class="text-muted">
-                                                Auteur : {{ posts[i].auteur.pseudo }} <br>
-                                                Catégorie : {{ posts[i].category.nameCategory }}
-                                            </small>
                                             <div class="mt-3">
                                                 <a href="{{ path('app_posts_show_user', {'id': posts[i].id}) }}" class="btn btn-sm btn-outline-primary">Voir les détails</a>
                                             </div>
@@ -94,12 +94,12 @@
                                 <img src="{{ asset('uploads/images/' ~ posts[5].image) }}" class="card-img-top" alt="{{ posts[5].title }}">
                             {% endif %}
                             <div class="card-body">
+                                <div class="post-meta">
+                                    <span class="author">{{ posts[5].auteur.pseudo }}</span><br>
+                                    <span class="category">{{ posts[5].category.nameCategory }}</span>
+                                </div>
                                 <h3>{{ posts[5].title }}</h3>
                                 <p>{{ posts[5].subtitle }}</p>
-                                <small class="text-muted">
-                                    Auteur : {{ posts[5].auteur.pseudo }} <br>
-                                    Catégorie : {{ posts[5].category.nameCategory }}
-                                </small>
                                 <div class="mt-3">
                                     <a href="{{ path('app_posts_show_user', {'id': posts[5].id}) }}" class="btn btn-primary">Voir les détails</a>
                                 </div>
