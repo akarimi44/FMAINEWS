@@ -56,4 +56,9 @@ final class MainController extends AbstractController
             'categoryId' => $id,
         ]);
     }
+    #[Route('/admin/dashboard', name: 'admin_dashboard')]
+    public function dashboard(): Response
+    {
+        return $this->render('admin/dashboard.html.twig');
+    }
 }

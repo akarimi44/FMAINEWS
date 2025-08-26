@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard Admin{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">Tableau de bord administrateur</h1>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Gestion des articles</h5>
+                    <a href="{{ path('app_posts_index') }}" class="btn btn-primary">Voir / Ajouter / Modifier / Supprimer les articles</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Gestion des catégories</h5>
+                    <a href="{{ path('app_categories_index') }}" class="btn btn-primary">Voir / Ajouter / Modifier / Supprimer les catégories</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Gestion des commentaires</h5>
+                    <a href="{{ path('app_comments_index') }}" class="btn btn-primary">Voir / Supprimer les commentaires</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
