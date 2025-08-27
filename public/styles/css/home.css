@@ -17,25 +17,25 @@
     /* Bootstrap синий */
 }
 
-/* Добавим hover эффект для карточек */
+
 .card:hover {
     transform: translateY(-4px);
     transition: all 0.2s ease-in-out;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
-/* Заголовки внутри карточек */
+
 .card h3,
 .card h5 {
     color: #111;
 }
 
-/* Subtitle обрезаем */
+
 .card p {
     color: #333;
 }
 
-/* Кнопки — пусть будут чётче */
+
 .btn-outline-primary {
     border-width: 2px;
 }

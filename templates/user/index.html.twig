@@ -3,6 +3,8 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
+<div class="background-image py-5">
+<div class="container mt-5 borderListAdmin p-2">
     <h1>User index</h1>
 
     <table class="table">
@@ -11,9 +13,7 @@
                 <th>Id</th>
                 <th>Email</th>
                 <th>Roles</th>
-                <th>Password</th>
                 <th>Pseudo</th>
-                <th>Avatar</th>
                 <th>Opption</th>
                 <th>CreatedAtUser</th>
                 <th>actions</th>
@@ -25,10 +25,8 @@
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
                 <td>{{ user.pseudo }}</td>
-                <td>{{ user.avatar }}</td>
-                <td>{{ user.opption ? 'Yes' : 'No' }}</td>
+                <td>{{ user.opption ? 'Oui' : 'Non' }}</td>
                 <td>{{ user.createdAtUser ? user.createdAtUser|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
@@ -44,4 +42,6 @@
     </table>
 
     <a href="{{ path('app_user_new') }}">Create new</a>
+</div>
+</div>
 {% endblock %}

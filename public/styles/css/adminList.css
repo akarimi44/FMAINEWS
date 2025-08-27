@@ -1,0 +1,73 @@
+.background-image {
+    background-image: url("/uploads/news.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+/* --- Базовая таблица --- */
+.responsive-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.responsive-table th,
+.responsive-table td {
+    padding: 0.75rem;
+    border: 1px solid #dee2e6;
+    text-align: left;
+    font-size: 15px;
+}
+
+/* Шапка */
+.responsive-table thead {
+    background: #343a40;
+    color: #fff;
+}
+
+/* Чередование строк */
+.responsive-table tbody tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+/* --- Адаптив под мобильные --- */
+@media (max-width: 768px) {
+    .responsive-table thead {
+        display: none;
+    }
+
+    .responsive-table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 0.75rem;
+        background: #fff;
+    }
+
+    .responsive-table td {
+        display: block;
+        text-align: left;
+        padding: 0.5rem 0;
+        font-size: 16px;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    .responsive-table td:last-child {
+        border-bottom: none;
+    }
+
+    .responsive-table td::before {
+        content: attr(data-label) ": ";
+        font-weight: bold;
+        color: #333;
+        display: inline-block;
+        width: auto;
+        margin-right: 0.5rem;
+    }
+}

@@ -3,6 +3,7 @@
 {% block title %}Comments index{% endblock %}
 
 {% block body %}
+<div class="container mt-5 borderListAdmin p-2">
     <h1>Comments index</h1>
 
     <table class="table">
@@ -34,4 +35,5 @@
     </table>
 
     <a href="{{ path('app_comments_new') }}">Create new</a>
+</div>
 {% endblock %}
