@@ -5,7 +5,10 @@
 {% block body %}
 <div class="background-image d-flex justify-content-center align-items-start pt-5">
     <div class="container bg-light bg-opacity-75 rounded p-4 shadow">
+    <div class="col d-flex justify-content-between align-items-center mb-3">
         <h1 class="mb-4">Liste des Articles</h1>
+        <a href="{{ path('app_posts_new') }}" class="btn btn-success mb-4">Créer un nouvel article</a>
+    </div>
 
         <div class="responsive-table">
             <table>
@@ -30,8 +33,8 @@
                         <td data-label="Date">{{ post.createdAtPost ? post.createdAtPost|date('Y-m-d H:i') : '' }}</td>
                         <td data-label="Publié">{{ post.isPublished ? 'Oui' : 'Non' }}</td>
                         <td data-label="Actions">
-                            <a href="{{ path('app_posts_show', {'id': post.id}) }}" class="btn btn-sm btn-secondary w-100 mb-1">Show</a>
-                            <a href="{{ path('app_posts_edit', {'id': post.id}) }}" class="btn btn-sm btn-primary w-100">Edit</a>
+                            <a href="{{ path('app_posts_show', {'id': post.id}) }}" class="btn btn-sm btn-secondary w-100 mb-1">Détails</a>
+                            <a href="{{ path('app_posts_edit', {'id': post.id}) }}" class="btn btn-sm btn-primary w-100">Modifier</a>
                         </td>
                     </tr>
                 {% else %}
@@ -43,7 +46,7 @@
             </table>
         </div>
 
-        <a href="{{ path('app_posts_new') }}" class="btn btn-success mt-3">Créer un nouvel article</a>
+        
     </div>
 </div>
 {% endblock %}

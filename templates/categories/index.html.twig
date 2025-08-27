@@ -3,11 +3,14 @@
 {% block title %}Categories index{% endblock %}
 
 {% block body %}
-<div class="background-image pt-5">
-<div class="container borderListAdmin p-2">
-    <h1>Categories index</h1>
-
-    <table class="table">
+<div class="background-image d-flex justify-content-center align-items-start pt-5">
+    <div class="container bg-light bg-opacity-75 rounded p-4 shadow">
+    <div class="col d-flex justify-content-between align-items-center mb-3">
+    <h1>Liste de catégories</h1>
+    <a href="{{ path('app_categories_new') }}" class="btn btn-success mb-3">Créer une nouvelle catégorie</a>
+    </div>
+<div class="responsive-table">
+    <table>
         <thead>
             <tr>
                 <th>Id</th>
@@ -18,11 +21,11 @@
         <tbody>
         {% for category in categories %}
             <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.nameCategory }}</td>
-                <td>
-                    <a href="{{ path('app_categories_show', {'id': category.id}) }}">show</a>
-                    <a href="{{ path('app_categories_edit', {'id': category.id}) }}">edit</a>
+                <td data-label="Id">{{ category.id }}</td>
+                <td data-label="Nom">{{ category.nameCategory }}</td>
+                <td data-label="Actions">
+                    <a href="{{ path('app_categories_show', {'id': category.id}) }}" class="btn btn-sm btn-secondary w-100 mb-1">Détails</a>
+                    <a href="{{ path('app_categories_edit', {'id': category.id}) }}" class="btn btn-sm btn-primary w-100">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -32,8 +35,8 @@
         {% endfor %}
         </tbody>
     </table>
+</div>
 
-    <a href="{{ path('app_categories_new') }}">Create new</a>
 </div>
 </div>
 {% endblock %}
