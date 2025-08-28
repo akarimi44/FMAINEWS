@@ -1,4 +1,60 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="background-image d-flex justify-content-center pt-5">
+    <div class="card p-4 shadow-lg" style="width: 40rem;">
+
+        <a href="{{ path('app_posts_index') }}" class="btn btn-secondary">Retourner</a>
+        <h3 class="my-2">Ajouter/Editer un article</h3>
+        {{ form_start(form) }}
+            <div class="form-group mb-3">
+                {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'Le titre de votre article'}}) }}
+                {{ form_errors(form.title) }}
+            </div>
+
+            <div class="form-group mb-3">
+                {{ form_label(form.subtitle, 'Sous-titre', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.subtitle, {'attr': {'class': 'form-control', 'placeholder': 'Un sous-titre accrocheur'}}) }}
+                {{ form_errors(form.subtitle) }}
+            </div>
+
+            <div class="form-group mb-3">
+                {{ form_label(form.content, 'Contenu 1', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': 5}}) }}
+                {{ form_errors(form.content) }}
+            </div>
+            
+            <div class="form-group mb-3">
+                {{ form_label(form.content1, 'Contenu 2', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.content1, {'attr': {'class': 'form-control', 'rows': 5}}) }}
+                {{ form_errors(form.content1) }}
+            </div>
+            
+            <div class="form-group mb-3">
+                {{ form_label(form.content2, 'Contenu 3', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.content2, {'attr': {'class': 'form-control', 'rows': 5}}) }}
+                {{ form_errors(form.content2) }}
+            </div>
+
+            <div class="form-group mb-3">
+                {{ form_label(form.image, 'Image', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.image) }}
+            </div>
+
+            <div class="form-group form-check mb-3 d-flex align-items-center">
+                {{ form_widget(form.is_published, {'attr': {'class': 'form-check-input'}}) }}
+                {{ form_label(form.is_published, 'Publier ?', {'label_attr': {'class': 'form-check-label ms-2'}}) }}
+                {{ form_errors(form.is_published) }}
+            </div>
+
+            <div class="form-group mb-4">
+                {{ form_label(form.category, 'Catégorie', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.category, {'attr': {'class': 'form-select'}}) }}
+                {{ form_errors(form.category) }}
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">{{ button_label|default('Enregistrer') }}</button>
+
+
+        {{ form_end(form) }}
+    </div>
+</div>
