@@ -1,110 +1,156 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Accueil - Derniers articles{% endblock %}
 
 {% block body %}
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-lg-10 col-12">
 
-            <h1 class="mb-4">Derniers articles</h1>
+            <h1 class="mb-4 text-center">📰 Derniers articles</h1>
 
-            {# Première ligne (post[0] grand à gauche, post[1], post[2] empilés à droite) #}
+            {# First row: one big post left, two stacked posts right #}
             <div class="row mb-4">
                 <div class="col-lg-8 col-12 mb-3 mb-lg-0">
                     {% if posts[0] is defined %}
-                        <div class="card h-100 shadow-sm">
+                        <article class="card h-100 shadow-sm" itemscope itemtype="https://schema.org/Article">
                             {% if posts[0].image %}
-                                <img src="{{ asset('uploads/images/' ~ posts[0].image) }}" class="card-img-top" alt="{{ posts[0].title }}">
+                                <img src="{{ asset('uploads/images/' ~ posts[0].image) }}" 
+                                     class="card-img-top"
+                                     alt="{{ posts[0].title|default('Article image') }}"
+                                     width="800" height="450"
+                                     sizes="(max-width: 768px) 100vw, 50vw"
+                                     loading="eager"   {# ВАЖНО: LCP без lazy #}
+                                     itemprop="image">
                             {% endif %}
                             <div class="card-body">
                                 <div class="post-meta">
-                                    <span class="author">Auteur : {{ posts[0].auteur.pseudo }}</span><br>
-                                    <span class="category">Catégorie : {{ posts[0].category.nameCategory }}</span>
+                                    <i class="fa-solid fa-user"></i> 
+                                    <span class="author" itemprop="author">{{ posts[0].auteur.pseudo }}</span><br>
+                                    <i class="fa-solid fa-folder"></i> 
+                                    <span class="category" itemprop="articleSection">{{ posts[0].category.nameCategory }}</span>
                                 </div>
-                                <h3>{{ posts[0].title }}</h3>
-                                <p>{{ posts[0].subtitle }}</p>
+                                <h2 itemprop="headline">{{ posts[0].title }}</h2>
+                                <p itemprop="description">{{ posts[0].subtitle }}</p>
                                 <div class="mt-3">
-                                    <a href="{{ path('app_posts_show_user', {'id': posts[0].id}) }}" class="btn btn-primary">Voir les détails</a>
+                                    <a href="{{ path('app_posts_show_user', {'id': posts[0].id}) }}" 
+                                       class="btn btn-primary">
+                                        <i class="fa-solid fa-circle-info"></i> Voir les détails
+                                    </a>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     {% endif %}
                 </div>
+
                 <div class="col-lg-4 col-12">
                     <div class="row">
                         {% for i in 1..2 %}
                             {% if posts[i] is defined %}
-                                <div class="col-12 mb-3">
-                                    <div class="card shadow-sm h-100">
+                                <article class="col-12 mb-3">
+                                    <div class="card shadow-sm h-100" itemscope itemtype="https://schema.org/Article">
                                         {% if posts[i].image %}
-                                            <img src="{{ asset('uploads/images/' ~ posts[i].image) }}" class="card-img-top" alt="{{ posts[i].title }}">
+                                            <img src="{{ asset('uploads/images/' ~ posts[i].image) }}" 
+                                                 class="card-img-top"
+                                                 alt="{{ posts[i].title|default('Article image') }}"
+                                                 width="400" height="250"
+                                                 sizes="(max-width: 768px) 100vw, 50vw"
+                                                 loading="lazy"
+                                                 itemprop="image">
                                         {% endif %}
                                         <div class="card-body">
                                             <div class="post-meta">
-                                                <span class="author">{{ posts[i].auteur.pseudo }}</span><br>
-                                                <span class="category">{{ posts[i].category.nameCategory }}</span>
+                                                <i class="fa-solid fa-user"></i> 
+                                                <span class="author" itemprop="author">{{ posts[i].auteur.pseudo }}</span><br>
+                                                <i class="fa-solid fa-folder"></i> 
+                                                <span class="category" itemprop="articleSection">{{ posts[i].category.nameCategory }}</span>
                                             </div>
-                                            <h5>{{ posts[i].title }}</h5>
-                                            <p>{{ posts[i].subtitle|slice(0,80) ~ '...' }}</p>
+                                            <h3 itemprop="headline">{{ posts[i].title }}</h3>
+                                            <p itemprop="description">{{ posts[i].subtitle|slice(0,80) ~ '...' }}</p>
                                             <div class="mt-3">
-                                                <a href="{{ path('app_posts_show_user', {'id': posts[i].id}) }}" class="btn btn-sm btn-outline-primary">Voir les détails</a>
+                                                <a href="{{ path('app_posts_show_user', {'id': posts[i].id}) }}" 
+                                                   class="btn btn-sm btn-outline-primary">
+                                                   <i class="fa-solid fa-circle-info"></i> Voir les détails
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </article>
                             {% endif %}
                         {% endfor %}
                     </div>
                 </div>
             </div>
 
-            {# Deuxième ligne (posts[3], posts[4] petits à gauche, posts[5] grand à droite) #}
+            {# Second row: two small posts left, one big post right #}
             <div class="row">
                 <div class="col-lg-4 col-12 order-lg-1 order-2">
                     <div class="row">
                         {% for i in 3..4 %}
                             {% if posts[i] is defined %}
-                                <div class="col-12 mb-3">
-                                    <div class="card shadow-sm h-100">
+                                <article class="col-12 mb-3">
+                                    <div class="card shadow-sm h-100" itemscope itemtype="https://schema.org/Article">
                                         {% if posts[i].image %}
-                                            <img src="{{ asset('uploads/images/' ~ posts[i].image) }}" class="card-img-top" alt="{{ posts[i].title }}">
+                                            <img src="{{ asset('uploads/images/' ~ posts[i].image) }}" 
+                                                 class="card-img-top"
+                                                 alt="{{ posts[i].title|default('Article image') }}"
+                                                 width="400" height="250"
+                                                 sizes="(max-width: 768px) 100vw, 50vw"
+                                                 loading="lazy"
+                                                 itemprop="image">
                                         {% endif %}
                                         <div class="card-body">
                                             <div class="post-meta">
-                                                <span class="author">{{ posts[i].auteur.pseudo }}</span><br>
-                                                <span class="category">{{ posts[i].category.nameCategory }}</span>
+                                                <i class="fa-solid fa-user"></i> 
+                                                <span class="author" itemprop="author">{{ posts[i].auteur.pseudo }}</span><br>
+                                                <i class="fa-solid fa-folder"></i> 
+                                                <span class="category" itemprop="articleSection">{{ posts[i].category.nameCategory }}</span>
                                             </div>
-                                            <h5>{{ posts[i].title }}</h5>
-                                            <p>{{ posts[i].subtitle|slice(0,80) ~ '...' }}</p>
+                                            <h3 itemprop="headline">{{ posts[i].title }}</h3>
+                                            <p itemprop="description">{{ posts[i].subtitle|slice(0,80) ~ '...' }}</p>
                                             <div class="mt-3">
-                                                <a href="{{ path('app_posts_show_user', {'id': posts[i].id}) }}" class="btn btn-sm btn-outline-primary">Voir les détails</a>
+                                                <a href="{{ path('app_posts_show_user', {'id': posts[i].id}) }}" 
+                                                   class="btn btn-sm btn-outline-primary">
+                                                   <i class="fa-solid fa-circle-info"></i> Voir les détails
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </article>
                             {% endif %}
                         {% endfor %}
                     </div>
                 </div>
+
                 <div class="col-lg-8 col-12 order-lg-2 order-1 mb-3 mb-lg-0">
                     {% if posts[5] is defined %}
-                        <div class="card h-100 shadow-sm">
+                        <article class="card h-100 shadow-sm" itemscope itemtype="https://schema.org/Article">
                             {% if posts[5].image %}
-                                <img src="{{ asset('uploads/images/' ~ posts[5].image) }}" class="card-img-top" alt="{{ posts[5].title }}">
+                                <img src="{{ asset('uploads/images/' ~ posts[5].image) }}" 
+                                     class="card-img-top"
+                                     alt="{{ posts[5].title|default('Article image') }}"
+                                     width="800" height="450"
+                                     sizes="(max-width: 768px) 100vw, 50vw"
+                                     loading="eager"   {# ВАЖНО: LCP без lazy #}
+                                     itemprop="image">
                             {% endif %}
                             <div class="card-body">
                                 <div class="post-meta">
-                                    <span class="author">{{ posts[5].auteur.pseudo }}</span><br>
-                                    <span class="category">{{ posts[5].category.nameCategory }}</span>
+                                    <i class="fa-solid fa-user"></i> 
+                                    <span class="author" itemprop="author">{{ posts[5].auteur.pseudo }}</span><br>
+                                    <i class="fa-solid fa-folder"></i> 
+                                    <span class="category" itemprop="articleSection">{{ posts[5].category.nameCategory }}</span>
                                 </div>
-                                <h3>{{ posts[5].title }}</h3>
-                                <p>{{ posts[5].subtitle }}</p>
+                                <h2 itemprop="headline">{{ posts[5].title }}</h2>
+                                <p itemprop="description">{{ posts[5].subtitle }}</p>
                                 <div class="mt-3">
-                                    <a href="{{ path('app_posts_show_user', {'id': posts[5].id}) }}" class="btn btn-primary">Voir les détails</a>
+                                    <a href="{{ path('app_posts_show_user', {'id': posts[5].id}) }}" 
+                                       class="btn btn-primary">
+                                       <i class="fa-solid fa-circle-info"></i> Voir les détails
+                                    </a>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     {% endif %}
                 </div>
             </div>

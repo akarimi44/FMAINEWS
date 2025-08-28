@@ -18,14 +18,15 @@
         <link href="https://fonts.googleapis.com/css2?family=Germania+One&display=swap" rel="stylesheet">
         
         <!-- Custom CSS -->
+    
+        
+        {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('styles/css/navbar.css') }}">
         <link rel="stylesheet" href="{{ asset('styles/css/home.css') }}">
         <link rel="stylesheet" href="{{ asset('styles/css/adminList.css') }}">
-        
-        {% block stylesheets %}
         {% endblock %}
     </head>
-    <body>
+    <body class="main-body">
         {% include 'elements/header.html.twig' %}
         
         {% block body %}

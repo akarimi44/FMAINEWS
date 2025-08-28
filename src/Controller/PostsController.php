@@ -22,9 +22,12 @@ final class PostsController extends AbstractController
     #[IsGranted('ROLE_EDITOR')]
     public function index(PostsRepository $postsRepository): Response
     {
-        return $this->render('posts/index.html.twig', [
-            'posts' => $postsRepository->findAll(),
-        ]);
+    return $this->render('posts/index.html.twig', [
+        'posts' => $postsRepository->createQueryBuilder('p')
+            ->orderBy('p.created_at_post', 'DESC')
+            ->getQuery()
+            ->getResult(),
+    ]);
     }
 
     #[Route('/new', name: 'app_posts_new', methods: ['GET', 'POST'])]
