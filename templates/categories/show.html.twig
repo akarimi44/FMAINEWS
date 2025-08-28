@@ -21,8 +21,8 @@
             </table>
 
             <div class="d-flex justify-content-between">
-                <a href="{{ path('app_categories_index') }}" class="btn btn-secondary">back to list</a>
-                <a href="{{ path('app_categories_edit', {'id': category.id}) }}" class="btn btn-primary">edit</a>
+                <a href="{{ path('app_categories_index') }}" class="btn btn-secondary">Retourner</a>
+                <a href="{{ path('app_categories_edit', {'id': category.id}) }}" class="btn btn-primary">Editer</a>
             </div>
 
             {{ include('categories/_delete_form.html.twig') }}

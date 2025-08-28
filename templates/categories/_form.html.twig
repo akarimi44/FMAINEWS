@@ -1,4 +1,22 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="background-image d-flex justify-content-center align-items-center ">
+    <div class="card p-4 shadow-lg" style="width: 30rem;">
+        {{ form_start(form) }}
+            <a href="{{ path('app_categories_index') }}" class="btn btn-secondary">Retourner</a>
+            <h2 class="card-title text-center mb-4">
+                {% if app.request.attributes.get('_route') == 'app_categories_new' %}
+                    Créer une nouvelle catégorie
+                {% else %}
+                    Modifier la catégorie
+                {% endif %}
+            </h2>
+
+            <div class="form-group mb-3">
+                {{ form_label(form.name_category, 'Nom de la catégorie', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.name_category, {'attr': {'class': 'form-control', 'placeholder': 'Ex: Actualités, Technologie'}}) }}
+                {{ form_errors(form.name_category) }}
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mt-3">{{ button_label|default('Enregistrer') }}</button>
+        {{ form_end(form) }}
+    </div>
+</div>

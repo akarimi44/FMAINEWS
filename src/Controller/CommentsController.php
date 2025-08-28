@@ -10,11 +10,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/comments')]
 final class CommentsController extends AbstractController
 {
     #[Route(name: 'app_comments_index', methods: ['GET'])]
+    #[IsGranted('ROLE_EDITOR')]
     public function index(CommentsRepository $commentsRepository): Response
     {
         return $this->render('comments/index.html.twig', [
@@ -23,6 +25,7 @@ final class CommentsController extends AbstractController
     }
 
     #[Route('/new', name: 'app_comments_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_EDITOR')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $comment = new Comments();
@@ -43,6 +46,7 @@ final class CommentsController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_comments_show', methods: ['GET'])]
+    #[IsGranted('ROLE_EDITOR')]
     public function show(Comments $comment): Response
     {
         return $this->render('comments/show.html.twig', [
@@ -51,6 +55,7 @@ final class CommentsController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_comments_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_EDITOR')]
     public function edit(Request $request, Comments $comment, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(Comments1Type::class, $comment);
@@ -69,6 +74,7 @@ final class CommentsController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_comments_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_EDITOR')]
     public function delete(Request $request, Comments $comment, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->getPayload()->getString('_token'))) {

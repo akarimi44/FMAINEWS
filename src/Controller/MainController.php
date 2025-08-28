@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class MainController extends AbstractController
 {
-    #[Route('/home', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function indexHome(PostsRepository $postsRepository): Response
     {
         return $this->render('mainPages/home.html.twig', [

@@ -1,4 +1,36 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="background-image d-flex justify-content-center align-items-start pt-5">
+    <div class="card p-4 shadow-lg" style="width: 35rem;">
+        {{ form_start(form) }}
+            <h2 class="card-title text-center mb-4">
+                    Contacter-nous
+            </h2>
+
+            <div class="form-group mb-3">
+                {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'Ex: Demande de collaboration'}}) }}
+                {{ form_errors(form.title) }}
+            </div>
+
+            <div class="form-group mb-3">
+                {{ form_label(form.sujet, 'Sujet', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.sujet, {'attr': {'class': 'form-control', 'placeholder': 'Ex: Questions sur les services'}}) }}
+                {{ form_errors(form.sujet) }}
+            </div>
+
+            <div class="form-group mb-3">
+                {{ form_label(form.message_contact, 'Message', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.message_contact, {'attr': {'class': 'form-control', 'rows': 5, 'placeholder': 'Votre message...'}}) }}
+                {{ form_errors(form.message_contact) }}
+            </div>
+
+            <div class="form-group mb-4">
+                {{ form_label(form.email_contact, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.email_contact, {'attr': {'class': 'form-control', 'placeholder': 'votre.email@exemple.com'}}) }}
+                {{ form_errors(form.email_contact) }}
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">{{ button_label|default('Envoyer') }}</button>
+
+        {{ form_end(form) }}
+    </div>
+</div>

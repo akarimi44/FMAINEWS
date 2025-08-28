@@ -6,21 +6,30 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class UserType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('roles')
-            ->add('password')
-            ->add('pseudo')
-            ->add('avatar')
-            ->add('opption')
-            ->add('createdAtUser', null, [
-                'widget' => 'single_text',
+            // ...
+            ->add('roles', ChoiceType::class, [
+                'choices'  => [
+                    'User' => 'ROLE_USER',
+                    'Editor' => 'ROLE_EDITOR',
+                    'Admin' => 'ROLE_ADMIN',
+                ],
+                'multiple' => true,
+                'expanded' => false, // Выпадающий список
+                'label' => 'Rôles'
             ])
+            ->add('opption', CheckboxType::class, [
+                'label'    => 'Is Opption?',
+                'required' => false,
+            ])
+            // ...
         ;
     }
 
