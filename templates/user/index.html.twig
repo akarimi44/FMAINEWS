@@ -3,11 +3,11 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-<div class="background-image py-5">
-<div class="container mt-5 borderListAdmin p-2">
+<div class="background-image d-flex justify-content-center align-items-start pt-5">
+<div class="container bg-light bg-opacity-75 rounded p-4 shadow">
     <h1>User index</h1>
 
-    <table class="table">
+    <table class="responsive-table w-100">
         <thead>
             <tr>
                 <th>Id</th>
@@ -22,15 +22,14 @@
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.pseudo }}</td>
-                <td>{{ user.opption ? 'Oui' : 'Non' }}</td>
-                <td>{{ user.createdAtUser ? user.createdAtUser|date('Y-m-d H:i:s') : '' }}</td>
+                <td data-label="Id">{{ user.id }}</td>
+                <td data-label="Mail">{{ user.email }}</td>
+                <td data-label="Rôle">{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td data-label="Pseudo">{{ user.pseudo }}</td>
+                <td data-label="Opption">{{ user.opption ? 'Oui' : 'Non' }}</td>
+                <td data-label="Date">{{ user.createdAtUser ? user.createdAtUser|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                   <a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-sm btn-secondary w-100 mb-1">Détails</a>
                 </td>
             </tr>
         {% else %}
@@ -40,8 +39,6 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_user_new') }}">Create new</a>
 </div>
 </div>
 {% endblock %}

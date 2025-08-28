@@ -9,17 +9,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContactsType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('title')
             ->add('sujet')
             ->add('message_contact')
-            ->add('email_contact')
-            ->add('created_at_contact', null, [
-                'widget' => 'single_text',
-            ])
-        ;
+            ->add('email_contact');
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

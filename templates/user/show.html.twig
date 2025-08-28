@@ -1,50 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}User Details{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+    <div class="background-image d-flex justify-content-center align-items-center">
+        <div class="card shadow-lg p-4" style="width: 40rem;">
+            <h1 class="card-title text-center mb-4">User Details</h1>
+            
+            <table class="table table-bordered mb-4">
+                <tbody>
+                    <tr>
+                        <th scope="row" class="bg-light">Id</th>
+                        <td>{{ user.id }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light">Email</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light">Roles</th>
+                        <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light">Pseudo</th>
+                        <td>{{ user.pseudo }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light">Avatar</th>
+                        <td>{{ user.avatar }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light">Option</th>
+                        <td>{{ user.opption ? 'Yes' : 'No' }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light">Created At</th>
+                        <td>{{ user.createdAtUser ? user.createdAtUser|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Pseudo</th>
-                <td>{{ user.pseudo }}</td>
-            </tr>
-            <tr>
-                <th>Avatar</th>
-                <td>{{ user.avatar }}</td>
-            </tr>
-            <tr>
-                <th>Opption</th>
-                <td>{{ user.opption ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAtUser</th>
-                <td>{{ user.createdAtUser ? user.createdAtUser|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+            <div class="d-flex justify-content-between mt-3">
+                <a href="{{ path('app_user_index') }}" class="btn btn-secondary">Retourner</a>
+                <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-primary">Editer</a>
+            </div>
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
-
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+            {{ include('user/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

@@ -3,10 +3,11 @@
 {% block title %}Contacts index{% endblock %}
 
 {% block body %}
-<div class="container mt-5 borderListAdmin p-2">
+<div class="background-image d-flex justify-content-center align-items-start pt-5">
+    <div class="container bg-light bg-opacity-75 rounded p-4 shadow">
     <h1>Contacts index</h1>
 
-    <table class="table">
+    <table class="responsive-table w-100">
         <thead>
             <tr>
                 <th>Id</th>
@@ -28,8 +29,7 @@
                 <td>{{ contact.emailContact }}</td>
                 <td>{{ contact.createdAtContact ? contact.createdAtContact|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_contacts_show', {'id': contact.id}) }}">show</a>
-                    <a href="{{ path('app_contacts_edit', {'id': contact.id}) }}">edit</a>
+                    <a href="{{ path('app_contacts_show', {'id': contact.id}) }}" class="btn btn-sm btn-secondary w-100 mb-1">Détails</a>
                 </td>
             </tr>
         {% else %}
@@ -39,7 +39,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_contacts_new') }}">Create new</a>
+    </div>
+    
 </div>
 {% endblock %}

@@ -28,7 +28,10 @@ class Contacts
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at_contact = null;
-
+    public function __construct()
+    {
+        $this->created_at_contact = new \DateTimeImmutable();
+    }
     public function getId(): ?int
     {
         return $this->id;

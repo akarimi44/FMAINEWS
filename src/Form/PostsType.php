@@ -2,12 +2,14 @@
 
 namespace App\Form;
 
-use App\Entity\Categories;
 use App\Entity\Posts;
+use App\Entity\Categories;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class PostsType extends AbstractType
 {
@@ -19,14 +21,25 @@ class PostsType extends AbstractType
             ->add('content')
             ->add('content1')
             ->add('content2')
-            ->add('image')
-            ->add('created_at_post', null, [
-                'widget' => 'single_text',
+            ->add('image', FileType::class, [
+                'label' => 'Upload a main image (JPG, PNG)',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid JPEG or PNG image.',
+                    ])
+                ],
             ])
             ->add('is_published')
             ->add('category', EntityType::class, [
                 'class' => Categories::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nameCategory', // Display the category name instead of its ID
             ])
         ;
     }

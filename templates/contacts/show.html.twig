@@ -1,42 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contacts{% endblock %}
+{% block title %}Contact Details{% endblock %}
 
 {% block body %}
-    <h1>Contacts</h1>
+    <div class="background-image d-flex justify-content-center align-items-center">
+        <div class="card shadow-lg p-4" style="width: 35rem;">
+            <h1 class="card-title text-center mb-4">Contact Details</h1>
+            
+            <table class="table table-bordered mb-4">
+                <tbody>
+                    <tr>
+                        <th scope="row" class="bg-light">Id</th>
+                        <td>{{ contact.id }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light">Title</th>
+                        <td>{{ contact.title }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light">Subject</th>
+                        <td>{{ contact.sujet }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light">Message</th>
+                        <td>{{ contact.messageContact }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light">Email</th>
+                        <td>{{ contact.emailContact }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light">Created At</th>
+                        <td>{{ contact.createdAtContact ? contact.createdAtContact|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ contact.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ contact.title }}</td>
-            </tr>
-            <tr>
-                <th>Sujet</th>
-                <td>{{ contact.sujet }}</td>
-            </tr>
-            <tr>
-                <th>Message_contact</th>
-                <td>{{ contact.messageContact }}</td>
-            </tr>
-            <tr>
-                <th>Email_contact</th>
-                <td>{{ contact.emailContact }}</td>
-            </tr>
-            <tr>
-                <th>Created_at_contact</th>
-                <td>{{ contact.createdAtContact ? contact.createdAtContact|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+            <div class="d-flex justify-content-between mt-3">
+                <a href="{{ path('app_contacts_index') }}" class="btn btn-secondary">Retourner</a>
+            </div>
 
-    <a href="{{ path('app_contacts_index') }}">back to list</a>
-
-    <a href="{{ path('app_contacts_edit', {'id': contact.id}) }}">edit</a>
-
-    {{ include('contacts/_delete_form.html.twig') }}
+            {{ include('contacts/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

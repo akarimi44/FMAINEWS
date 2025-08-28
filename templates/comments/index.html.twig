@@ -3,10 +3,13 @@
 {% block title %}Comments index{% endblock %}
 
 {% block body %}
-<div class="container mt-5 borderListAdmin p-2">
-    <h1>Comments index</h1>
-
-    <table class="table">
+<div class="background-image d-flex justify-content-center align-items-start pt-5">
+<div class="container bg-light bg-opacity-75 rounded p-4 shadow">
+    <div class="col d-flex justify-content-between align-items-center mb-3">
+        <h1>Comments index</h1>
+    </div>
+    <div class="responsive-table">
+        <table>
         <thead>
             <tr>
                 <th>Id</th>
@@ -18,12 +21,11 @@
         <tbody>
         {% for comment in comments %}
             <tr>
-                <td>{{ comment.id }}</td>
-                <td>{{ comment.commentText }}</td>
-                <td>{{ comment.createdAtComment ? comment.createdAtComment|date('Y-m-d H:i:s') : '' }}</td>
+                <td data-label="Id">{{ comment.id }}</td>
+                <td data-label="Commentaire">{{ comment.commentText }}</td>
+                <td data-label="Date">{{ comment.createdAtComment ? comment.createdAtComment|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_comments_show', {'id': comment.id}) }}">show</a>
-                    <a href="{{ path('app_comments_edit', {'id': comment.id}) }}">edit</a>
+                    <a href="{{ path('app_comments_show', {'id': comment.id}) }}" class="btn btn-sm btn-secondary w-100 mb-1">Détails</a>
                 </td>
             </tr>
         {% else %}
@@ -32,8 +34,9 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+        </table>
+    </div>
 
-    <a href="{{ path('app_comments_new') }}">Create new</a>
+</div>
 </div>
 {% endblock %}
