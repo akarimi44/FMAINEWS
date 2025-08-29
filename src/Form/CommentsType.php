@@ -3,13 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Comments;
-use App\Entity\Posts;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class CommentsType extends AbstractType
 {
@@ -17,14 +15,20 @@ class CommentsType extends AbstractType
     {
         $builder
             ->add('comment_text', TextareaType::class, [
-                'label' => 'Votre commentaire',
+                'label' => false, // убираем заголовок, только placeholder
                 'required' => true,
                 'attr' => [
+                    'class' => 'form-control comment-textarea',
                     'rows' => 4,
-                    'placeholder' => 'écrire un commentaire...',
+                    'placeholder' => 'Écrire un commentaire...',
                 ],
             ])
-        ;
+            ->add('save', SubmitType::class, [
+                'label' => 'Envoyer',
+                'attr' => [
+                    'class' => 'btn btn-primary mt-2 comment-submit-btn',
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

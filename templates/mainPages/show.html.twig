@@ -3,40 +3,65 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block body %}
-    <div class="post">
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.content }}</p>
-        <small>
-            Publié le {{ post.createdAtPost|date('d/m/Y H:i') }}
-            par {{ post.auteur.pseudo }}
-        </small>
-    </div>
+<div class="container mt-5 post-detail-page">
 
-    <hr>
-
-    <div class="comments">
-        <h2>Commentaires ({{ comments|length }})</h2>
-
-        {% if comments is not empty %}
-            {% for comment in comments %}
-                <div class="comment" style="margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ddd; border-radius: 5px;">
-                    <strong>{{ comment.user.pseudo }}</strong> 
-                    <small>— {{ comment.createdAtComment|date('d/m/Y H:i') }}</small>
-                    <p>{{ comment.commentText }}</p>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>Aucun commentaire pour le moment.</p>
+    <div class="post-detail card shadow-sm mb-4" itemscope itemtype="https://schema.org/Article">
+        {% if post.image %}
+            <img src="{{ asset('uploads/images/' ~ post.image) }}" 
+                 alt="{{ post.title|default('Image article') }}" 
+                 class="post-image" 
+                 itemprop="image">
         {% endif %}
+        <div class="card-body">
+            <h1 class="post-title" itemprop="headline">{{ post.title }}</h1>
+            <p class="post-content" itemprop="articleBody">{{ post.content|raw }}</p>
+            <div class="post-meta text-muted">
+                Publié le <span itemprop="datePublished">{{ post.createdAtPost|date('d/m/Y H:i') }}</span>
+                par <strong itemprop="author">{{ post.auteur.pseudo }}</strong>
+            </div>
+        </div>
     </div>
 
-    <hr>
+    <div class="comments-section card shadow-sm mb-4">
+        <div class="card-body">
+            <h2 class="comments-title">💬 Commentaires ({{ comments|length }})</h2>
 
-    <div class="add-comment">
-        <h2>Ajouter un commentaire</h2>
-        {{ form_start(form) }}
-            {{ form_row(form.comment_text, {'label': 'Votre commentaire'}) }}
-            <button class="btn btn-primary">Envoyer</button>
-        {{ form_end(form) }}
+            {% if comments is not empty %}
+                {% for comment in comments %}
+                    <div class="comment d-flex mb-3 p-3" itemscope itemtype="https://schema.org/Comment">
+                        <div class="comment-avatar me-3">
+                            {% if comment.user.avatar is defined and comment.user.avatar %}
+                                <img src="{{ asset('uploads/images/' ~ comment.user.avatar) }}" 
+                                     alt="avatar de {{ comment.user.pseudo }}" 
+                                     class="avatar-img" 
+                                     itemprop="image">
+                            {% else %}
+                                <i class="fa-solid fa-user fa-2x default-avatar"></i>
+                            {% endif %}
+                        </div>
+                        <div class="comment-body">
+                            <strong class="comment-author" itemprop="author">{{ comment.user.pseudo }}</strong>
+                            <small class="text-muted"> — 
+                                <time itemprop="datePublished">{{ comment.createdAtComment|date('d/m/Y H:i') }}</time>
+                            </small>
+                            <p class="comment-text" itemprop="text">{{ comment.commentText }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-comments">Encore aucun commentaire. Soyez le premier !</p>
+            {% endif %}
+        </div>
     </div>
+
+    <div class="add-comment card shadow-sm">
+        <div class="card-body">
+            <h2 class="add-comment-title">➕ Ajouter un commentaire</h2>
+            {{ form_start(form) }}
+                {{ form_row(form.comment_text, {'label': 'Votre commentaire'}) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+</div>
 {% endblock %}

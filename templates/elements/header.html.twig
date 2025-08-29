@@ -28,40 +28,40 @@
       </ul>
       <div class="header-social-links">
         {% if app.user %}
-          {% if app.user.opption is same as ('yes') %}
-              {% if app.user.avatar is empty %}
-                <i class="fa-solid fa-circle-user" style="color: white"></i>
-                <span class="zxfirstname" style="text-decoration:none;">{{ app.user.pseudo|capitalize }}</span>
-                <a class="loggouts mr-2" href="{{ path('app_logout') }}">
-                  <i class="fa solid fa-power-off" style="color: white"></i>
-                </a>
-                <a class="zxadmin mr-2" href="">
-                  <i class="fa fa-circle-play" style="color: white"></i>
-                </a>
+            {% if app.user.opption %}
+                {% if app.user.avatar is empty %}
+                    <i class="fa-solid fa-circle-user" style="color: white"></i>
+                    <span class="zxfirstname" style="text-decoration:none;">{{ app.user.pseudo|capitalize }}</span>
+                    <a class="loggouts mr-2" href="{{ path('app_logout') }}">
+                        <i class="fa solid fa-power-off" style="color: white"></i>
+                    </a>
+                    <a class="zxadmin mr-2" href="{{ path('admin_dashboard') }}">
+                        <i class="fa fa-circle-play" style="color: white"></i>
+                    </a>
                 {% else %}
-                <img class="roundedImage" src="{{ asset('uploads/images/' ~ app.user.avatar) }}" style="width:25px; height:25px; border-radius:50%">&ensp;
-                <span class="zxfirstname">{{ app.user.pseudo|capitalize }}</span>
-                <a class="loggouts" href="{{ path('app_logout') }}">&ensp;<i class="fa-solid fa-power-off" style="color: white"></i></a>
-                <a class="zxadmin mr-2" href="">
-                  <i class="fa fa-circle-play" style="color: white"></i>
-                </a>
-              {% endif %}
-          {% else %}
-            {% if app.user.avatar is empty %}
-                <i class="fa-solid fa-circle-user" style="color: black"></i>
-                <span class="zxfirstname" style="text-decoration:none;">{{ app.user.pseudo|capitalize }}</span>
-                <a class="loggouts mr-2" href="{{ path('app_logout') }}">
-                  <i class="fa solid fa-power-off" style="color: white"></i>
-                </a>
-              {% else %}
-                <img class="roundedImage" src="{{ asset('uploads/images/' ~ app.user.avatar) }}" style="width:25px; height:25px; border-radius:50%">&ensp;
-                <span class="zxfirstname">{{ app.user.pseudo|capitalize }}</span>
-                <a class="loggouts" href="{{ path('app_logout') }}">&ensp;<i class="fa-solid fa-power-off" style="color:white"></i></a>
+                    <img class="roundedImage" src="{{ asset('uploads/images/' ~ app.user.avatar) }}" style="width:25px; height:25px; border-radius:50%">&ensp;
+                    <span class="zxfirstname">{{ app.user.pseudo|capitalize }}</span>
+                    <a class="loggouts" href="{{ path('app_logout') }}">&ensp;<i class="fa-solid fa-power-off" style="color: white"></i></a>
+                    <a class="zxadmin mr-2" href="{{ path('admin_dashboard') }}">
+                        <i class="fa fa-circle-play" style="color: white"></i>
+                    </a>
+                {% endif %}
+            {% else %}
+                {% if app.user.avatar is empty %}
+                    <i class="fa-solid fa-circle-user" style="color: black"></i>
+                    <span class="zxfirstname" style="text-decoration:none;">{{ app.user.pseudo|capitalize }}</span>
+                    <a class="loggouts mr-2" href="{{ path('app_logout') }}">
+                        <i class="fa solid fa-power-off" style="color: white"></i>
+                    </a>
+                {% else %}
+                    <img class="roundedImage" src="{{ asset('uploads/images/' ~ app.user.avatar) }}" style="width:25px; height:25px; border-radius:50%">&ensp;
+                    <span class="zxfirstname">{{ app.user.pseudo|capitalize }}</span>
+                    <a class="loggouts" href="{{ path('app_logout') }}">&ensp;<i class="fa-solid fa-power-off" style="color:white"></i></a>
+                {% endif %}
             {% endif %}
-          {% endif %}
         {% else %}
             <a class="login" href="{{ path('app_login') }}">
-              <i class="fa-regular fa-circle-user" style="color: white"></i>&ensp;
+                <i class="fa-regular fa-circle-user" style="color: white"></i>&ensp;
             </a>
         {% endif %}
       </div>

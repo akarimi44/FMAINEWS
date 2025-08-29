@@ -24,27 +24,33 @@ final class MainController extends AbstractController
     #[Route('/show/{id}', name: 'app_posts_show_user', methods: ['GET', 'POST'])]
     public function show(Request $request, Posts $post, EntityManagerInterface $em): Response
     {
-        $comment = new Comments();
-        $form = $this->createForm(CommentsType::class, $comment);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $comment->setUser($this->getUser());
-            $comment->setPost($post);
-            $comment->setCreatedAtComment(new \DateTimeImmutable());
-
-            $em->persist($comment);
-            $em->flush();
-
-            return $this->redirectToRoute('app_posts_show_user', ['id' => $post->getId()]);
-        }
-
-        return $this->render('mainPages/show.html.twig', [
-            'post' => $post,
-            'form' => $form->createView(),
-            'comments' => $post->getComments(),
-        ]);
+    if (!$this->getUser()) {
+        return $this->redirectToRoute('app_login');
     }
+
+    $comment = new Comments();
+    $form = $this->createForm(CommentsType::class, $comment);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $comment->setUser($this->getUser());
+        $comment->setPost($post);
+        $comment->setCreatedAtComment(new \DateTimeImmutable());
+
+        $em->persist($comment);
+        $em->flush();
+
+        return $this->redirectToRoute('app_posts_show_user', ['id' => $post->getId()]);
+    }
+
+    return $this->render('mainPages/show.html.twig', [
+        'post' => $post,
+        'form' => $form->createView(),
+        'comments' => $post->getComments(),
+    ]);
+    }
+
 
     #[Route('/category/{id}', name: 'app_posts_by_category')]
     public function postsByCategory(int $id, PostsRepository $postsRepository): Response
