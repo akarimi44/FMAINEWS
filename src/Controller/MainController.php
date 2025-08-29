@@ -67,4 +67,9 @@ final class MainController extends AbstractController
     {
         return $this->render('admin/dashboard.html.twig');
     }
+    #[Route('/privacy', name: 'app_privacy')]
+    public function privacy(): Response
+    {
+        return $this->render('privacy/politique_confidentialite.html.twig');
+    }
 }

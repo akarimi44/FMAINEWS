@@ -1,3 +1,8 @@
+.category-page{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* всегда на всю высоту */
+}
 
 .category-page .category-title {
     font-weight: 700;
