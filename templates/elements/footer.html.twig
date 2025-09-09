@@ -1,6 +1,193 @@
-<footer class="fmai-footer">
-    <div class="container d-flex justify-content-between align-items-center">
-        <span class="footer-logo">Fmai News</span>
-        <a href="{{ path('app_privacy') }}" class="footer-link">Politique de confidentialité</a>
-    </div>
-</footer>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer avec fond noir</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles généraux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            
+            background: linear-gradient( #c9c8cbff 100%);
+            display: flex;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        /* Footer avec fond noir */
+        .footer {
+            background-color: #000; 
+            color: #fff;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-section h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .footer-section h4:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #ff6b6b;
+        }
+        
+        .footer-section p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #ff6b6b;
+        }
+        
+        .contact-info {
+            color: #ccc;
+            line-height: 1.8;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: #ff6b6b;
+        }
+        
+        .social-icons {
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #222;
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: #ff6b6b;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #ccc;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        
+        <h1></h1>
+        <p></p>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>FMAI NEWS</h4>
+                <p>Votre source d'information sur l'IA et la Tech. Des analyses approfondies et des actualités pour rester informé des dernières innovations.</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.x.com"><i class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>AUTRES CATEGORIES</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Intelligence Artificielle</a></li>
+                    <li><a href="#">Machine Learning</a></li>
+                    <li><a href="#">Cloud Computing</a></li>
+                    <li><a href="#">Developpement Web et Mobile </a></li>
+                    
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Plus</h4>
+                <ul class="footer-links">
+                    <li><a href="#">A propos</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Politique de Confidentialité</a></li>
+                    <li><a href="#">Conditions d'utilisation</a></li>
+                    <li><a href="#">Aide</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>CONTACT</h4>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i>Sheikh Zayed Rd - Trade Centre - Trade Centre 2 - Dubai - Émirats arabes unis</p>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d817.4272866477128!2d55.28091897017027!3d25.21729705655462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f435761947d9f%3A0x961a9e3368c47465!2sWebsite%20Design%20Agency!5e1!3m2!1sfr!2sfr!4v1756692081182!5m2!1sfr!2sfr" width="200" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <p><i class="fas fa-envelope"></i> fmainews.com</p>
+                    <p><i class="fas fa-phone"></i> + 01 234 567 88</p>
+                    <p class="mobile-phone"><i class="fas fa-mobile-alt"></i> + 971 50 123 4567</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2025 Copyright: fmainews.com</p>
+        </div>
+    </footer>
+</body>
+</html>

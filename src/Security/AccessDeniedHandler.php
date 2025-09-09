@@ -15,7 +15,7 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
 
     public function handle(Request $request, AccessDeniedException $accessDeniedException): ?Response
     {
-        // редиректим на главную страницу
+        
         $url = $this->router->generate('app_home');
         return new RedirectResponse($url);
     }

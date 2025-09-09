@@ -22,7 +22,7 @@ public function buildForm(FormBuilderInterface $builder, array $options): void
                     'Admin' => 'ROLE_ADMIN',
                 ],
                 'multiple' => true,
-                'expanded' => false, // Выпадающий список
+                'expanded' => false, 
                 'label' => 'Rôles'
             ])
             ->add('opption', CheckboxType::class, [

@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\PostsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class MainController extends AbstractController
 {
@@ -63,6 +64,8 @@ final class MainController extends AbstractController
         ]);
     }
         #[Route('/admin/dashboard', name: 'admin_dashboard')]
+        #[IsGranted('ROLE_EDITOR')]
+
     public function dashboard(): Response
     {
         return $this->render('admin/dashboard.html.twig');

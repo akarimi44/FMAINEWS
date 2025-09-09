@@ -40,7 +40,6 @@ class AppFixtures extends Fixture
             $user->setPseudo($faker->userName);
             $user->setRoles(['ROLE_USER']);
 
-            // пароль всегда "password"
             $hashedPassword = $this->hasher->hashPassword($user, 'password');
             $user->setPassword($hashedPassword);
 
